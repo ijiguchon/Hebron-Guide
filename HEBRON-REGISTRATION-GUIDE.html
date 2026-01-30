@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebron 앱 등록 가이드 - 시애틀지구촌교회</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1F4788 0%, #0d2347 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: url('icon-180.png') center/cover no-repeat;
+            border-radius: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .logo.fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            font-size: 2.5em;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .header .vision {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-top: 15px;
+            font-weight: 700;
+            color: #FFE5A0;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .intro {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #C9A227;
+            text-align: center;
+        }
+        
+        .intro h2 {
+            color: #1F4788;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+        
+        .intro p {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .step-section {
+            margin: 30px 0;
+        }
+        
+        .step-title {
+            color: #1F4788;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #C9A227;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #C9A227;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #1F4788;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .step h3 {
+            font-size: 1.3em;
+            color: #1F4788;
+            margin-bottom: 15px;
+        }
+        
+        .step p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        
+        .step strong {
+            color: #C9A227;
+        }
+        
+        .url-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+            border: 2px solid #1F4788;
+        }
+        
+        .url-box .url {
+            font-size: 1.3em;
+            color: #1F4788;
+            font-weight: 700;
+            word-break: break-all;
+        }
+        
+        .codes-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #1F4788;
+            margin: 20px 0;
+        }
+        
+        .codes-box h3 {
+            color: #1F4788;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .code-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .code-name {
+            font-size: 1.1em;
+            color: #1F4788;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .code-value {
+            font-size: 1.5em;
+            color: #C9A227;
+            font-weight: 700;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .highlight strong {
+            color: #856404;
+        }
+        
+        .schedule {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #28a745;
+            margin: 20px 0;
+        }
+        
+        .schedule h4 {
+            color: #155724;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .schedule-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .schedule-item .time {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .schedule-item .activity {
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: #1F4788;
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .footer .vision-box {
+            background: rgba(201,162,39,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .footer .vision-title {
+            font-size: 1.2em;
+            color: #FFE5A0;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .footer p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo fallback" id="app-logo">⛪</div>
+            <h1>Hebron 앱 등록 가이드</h1>
+            <div class="subtitle">시애틀지구촌교회</div>
+            <div class="vision">하나님과 연합하는 나의 제단</div>
+        </div>
+        
+        <div class="content">
+            <!-- 소개 -->
+            <div class="intro">
+                <h2>📱 5단계로 간단 등록</h2>
+                <p>
+                    21일 경청 프로젝트 시작을 위한<br>
+                    빠르고 쉬운 등록 가이드입니다
+                </p>
+            </div>
+            
+            <!-- 1단계: 앱 접속 -->
+            <div class="step-section">
+                <h2 class="step-title">
+                    <span>📱</span>
+                    1단계: 앱 접속
+                </h2>
+                
+                <div class="step">
+                    <h3><span class="step-number">1</span>아래 주소로 접속하세요</h3>
+                    <div class="url-box">
+                        <div class="url">hebron-ijiguchon.web.app</div>
+                    </div>
+                    <p>💡 <strong>팁:</strong> 홈 화면에 추가하면 앱처럼 사용 가능!</p>
+                </div>
+            </div>
+            
+            <!-- 2단계: 로그인 -->
+            <div class="step-section">
+                <h2 class="step-title">
+                    <span>🔐</span>
+                    2단계: 로그인
+                </h2>
+                
+                <div class="step">
+                    <h3><span class="step-number">2</span>로그인 방법 선택</h3>
+                    <p>
+                        <strong>방법 1:</strong> 이메일 주소 입력 → 로그인 링크 전송 클릭<br>
+                        (이메일로 받은 링크 클릭하면 자동 로그인)
+                    </p>
+                    <p>
+                        <strong>방법 2:</strong> Google 계정으로 간편 로그인
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 3단계: 프로필 설정 -->
+            <div class="step-section">
+                <h2 class="step-title">
+                    <span>👤</span>
+                    3단계: 프로필 설정
+                </h2>
+                
+                <div class="step">
+                    <h3><span class="step-number">3</span>기본 정보 입력</h3>
+                    <p>
+                        <strong>이름:</strong> 본인 이름<br>
+                        <strong>목장 이름:</strong> 아래 코드표 참고<br>
+                        <strong>영적 여정:</strong> VIP/신자/제자/목자 선택<br>
+                        <strong>공개 범위:</strong> 나만 보기/목자와 공유/목장 전체 공유
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 4단계: 목장 등록 -->
+            <div class="step-section">
+                <h2 class="step-title">
+                    <span>🏠</span>
+                    4단계: 목장 등록
+                </h2>
+                
+                <div class="step">
+                    <h3><span class="step-number">4</span>목장 탭에서 등록</h3>
+                    <p>
+                        하단 메뉴 <strong>"목장"</strong> 탭 클릭 →<br>
+                        <strong>"🙋 목장식구 등록"</strong> 버튼 클릭
+                    </p>
+                    
+                    <div class="highlight">
+                        <strong>✏️ 입력 내용:</strong><br>
+                        • 이름: 본인 이름<br>
+                        • 목장 이름: 어린이/GMC YOUTH/청년/이스라엘/멕시코/인도네시아<br>
+                        • 목장 코드: 아래 표 참고 (GMCHC001, GMCHC101, GMCHC201, GMCHC301...)<br>
+                        • 역할: 목원 (목자님은 목자/목녀)
+                    </div>
+                </div>
+                
+                <!-- 목장 코드표 -->
+                <div class="codes-box">
+                    <h3>📋 목장 코드표</h3>
+                    <div class="code-grid">
+                        <div class="code-item">
+                            <div class="code-name">👶 어린이 목장</div>
+                            <div class="code-value">GMCHC001</div>
+                        </div>
+                        <div class="code-item">
+                            <div class="code-name">👨 GMC YOUTH</div>
+                            <div class="code-value">GMCHC101</div>
+                        </div>
+                        <div class="code-item">
+                            <div class="code-name">🎓 청년 목장</div>
+                            <div class="code-value">GMCHC201</div>
+                        </div>
+                        <div class="code-item">
+                            <div class="code-name">🇮🇱 이스라엘 목장</div>
+                            <div class="code-value">GMCHC301</div>
+                        </div>
+                        <div class="code-item">
+                            <div class="code-name">🇲🇽 멕시코 목장</div>
+                            <div class="code-value">GMCHC302</div>
+                        </div>
+                        <div class="code-item">
+                            <div class="code-name">🇮🇩 인도네시아 목장</div>
+                            <div class="code-value">GMCHC303</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 15px; color: #1F4788; font-size: 0.95em;">
+                        💡 목장 코드는 딱 한 번만 입력!<br>
+                        <span style="font-size: 0.85em; opacity: 0.8;">확장 가능한 체계적 코드 (GMCHC001-999)</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 5단계: 21일 프로젝트 시작 -->
+            <div class="step-section">
+                <h2 class="step-title">
+                    <span>🎯</span>
+                    5단계: 21일 프로젝트 시작
+                </h2>
+                
+                <div class="step">
+                    <h3><span class="step-number">5</span>경청훈련 시작하기</h3>
+                    <p>
+                        <strong>"가이드"</strong> 탭 →<br>
+                        <strong>"21일 경청 프로젝트 시작하기"</strong> 버튼 클릭
+                    </p>
+                    
+                    <div class="schedule">
+                        <h4>⏰ 매일 30분 루틴</h4>
+                        <div class="schedule-grid">
+                            <div class="schedule-item">
+                                <div class="time">10분</div>
+                                <div class="activity">📖 말씀 묵상</div>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="time">15분</div>
+                                <div class="activity">🙏 침묵 기도</div>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="time">5분</div>
+                                <div class="activity">✍️ 경청 노트</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 15px;">
+                        <strong style="color: #28a745;">일지 탭에서 매일의 경청 경험을 기록하세요!</strong>
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <div class="vision-box">
+                <div class="vision-title">Genesis 13:14 비전</div>
+                <div style="font-size: 1.1em; margin: 15px 0;">하나님과 연합하는 나의 제단</div>
+                <p style="font-size: 0.95em; opacity: 0.9;">
+                    "너 있는 곳에서 눈을 크게 뜨고,<br>
+                    북쪽과 남쪽, 동쪽과 서쪽을 보아라"<br>
+                    - 창세기 13:14
+                </p>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 1.1em; font-weight: 600;">
+                21일 경청 프로젝트<br>
+                하나님의 음성이 들리는 귀
+            </p>
+            
+            <p style="margin-top: 20px; opacity: 0.8;">
+                시애틀지구촌교회<br>
+                Seattle Global Mission Church
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Logo loading
+        window.addEventListener('load', function() {
+            const logo = document.getElementById('app-logo');
+            const img = new Image();
+            img.onload = function() {
+                logo.classList.remove('fallback');
+                logo.style.backgroundImage = "url('icon-180.png')";
+            };
+            img.onerror = function() {
+                const altImg = new Image();
+                altImg.onload = function() {
+                    logo.classList.remove('fallback');
+                    logo.style.backgroundImage = "url('icon-192.png')";
+                };
+                altImg.src = 'icon-192.png';
+            };
+            img.src = 'icon-180.png';
+        });
+    </script>
+</body>
+</html>
