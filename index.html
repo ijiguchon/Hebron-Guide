@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hebron 앱 등록 가이드 - 시애틀지구촌교회</title>
+    <title>Hebron Registration Guide | Hebron 앱 등록 가이드</title>
     <style>
         * {
             margin: 0;
@@ -12,520 +12,957 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 0;
-            margin: 0;
+            padding: 20px 0;
+        }
+        
+        /* 언어 전환 버튼 */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border: none;
+            color: #1F4788;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1em;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.7);
+        }
+        
+        /* 언어별 콘텐츠 */
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.6s;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .container {
-            max-width: 100%;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 0;
-            box-shadow: none;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+            border-radius: 20px;
             overflow: hidden;
         }
         
+        /* 헤더 */
         .header {
-            background: linear-gradient(135deg, #1F4788 0%, #0d2347 100%);
+            background: linear-gradient(135deg, #1F4788 0%, #667eea 50%, #764ba2 100%);
             color: white;
-            padding: 50px 30px;
+            padding: 60px 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: pulse 5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
         }
         
         .logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            background: url('icon-180.png') center/cover no-repeat;
-            border-radius: 22px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-        
-        .logo.fallback {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 35px;
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            font-size: 2.5em;
+            font-size: 4em;
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite, rotate 10s linear infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes rotate {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(360deg); }
         }
         
         .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            font-weight: 800;
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 5px 20px rgba(255,255,255,0.3); }
+            50% { text-shadow: 0 10px 40px rgba(255,255,255,0.6), 0 0 60px rgba(255,215,0,0.4); }
         }
         
         .header .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
+            font-size: 1.4em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
         }
         
         .header .vision {
-            font-size: 1.2em;
-            opacity: 0.95;
-            margin-top: 15px;
-            font-weight: 700;
-            color: #FFE5A0;
+            font-size: 1.6em;
+            margin-top: 20px;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 1;
         }
         
         .content {
-            padding: 40px 30px;
+            padding: 50px 40px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
         }
         
+        /* 소개 박스 */
         .intro {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #C9A227;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFE082 100%);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            border: 5px solid #FFB300;
+            box-shadow: 0 15px 40px rgba(255, 179, 0, 0.4);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 4em;
+            opacity: 0.3;
+            animation: sparkle 3s infinite;
+        }
+        
+        .intro::after {
+            content: '✨';
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 4em;
+            opacity: 0.3;
+            animation: sparkle 3s infinite 0.5s;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
         }
         
         .intro h2 {
-            color: #1F4788;
-            font-size: 1.6em;
-            margin-bottom: 15px;
+            color: #E65100;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 900;
         }
         
         .intro p {
-            color: #333;
-            font-size: 1.1em;
-            line-height: 1.8;
+            color: #4E342E;
+            font-size: 1.3em;
+            line-height: 1.9;
+            font-weight: 600;
         }
         
-        .step-section {
-            margin: 30px 0;
+        .section {
+            margin-bottom: 50px;
         }
         
-        .step-title {
-            color: #1F4788;
-            font-size: 1.6em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #C9A227;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .step {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid #C9A227;
-        }
-        
-        .step-number {
-            display: inline-block;
-            background: #1F4788;
+        /* 섹션 타이틀 */
+        .section-title {
+            background: linear-gradient(135deg, #1F4788 0%, #667eea 100%);
             color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            font-weight: bold;
-            margin-right: 10px;
+            padding: 25px 35px;
+            border-radius: 20px;
+            font-size: 1.7em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(31, 71, 136, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+        
+        /* 스텝 박스 */
+        .step {
+            background: white;
+            border-left: 8px solid #C9A227;
+            padding: 35px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #C9A227);
+        }
+        
+        .step:hover {
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
         }
         
         .step h3 {
-            font-size: 1.3em;
             color: #1F4788;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        
+        .step-content {
+            font-size: 1.15em;
+            line-height: 2;
+        }
+        
+        .step-content strong {
+            color: #1F4788;
+            font-weight: 900;
+        }
+        
+        .step-content ul, .step-content ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        
+        .step-content li {
             margin-bottom: 15px;
+            padding-left: 10px;
         }
         
-        .step p {
-            color: #555;
-            font-size: 1.05em;
-            line-height: 1.8;
-            margin: 10px 0;
-        }
-        
-        .step strong {
-            color: #C9A227;
-        }
-        
-        .url-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
+        /* 하이라이트 박스 */
+        .highlight {
+            background: linear-gradient(135deg, #E1F5FE 0%, #81D4FA 100%);
+            border: 4px dashed #0288D1;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
             text-align: center;
-            margin: 15px 0;
-            border: 2px solid #1F4788;
-        }
-        
-        .url-box .url {
             font-size: 1.3em;
-            color: #1F4788;
-            font-weight: 700;
-            word-break: break-all;
+            font-weight: 800;
+            color: #01579B;
+            box-shadow: 0 8px 25px rgba(2, 136, 209, 0.3);
         }
         
-        .codes-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        /* 코드 테이블 */
+        .code-table {
+            background: white;
+            border: 5px solid #1F4788;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(31, 71, 136, 0.3);
+        }
+        
+        .code-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .code-table th {
+            background: linear-gradient(135deg, #1F4788 0%, #667eea 100%);
+            color: white;
+            padding: 25px;
+            text-align: left;
+            font-weight: 900;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .code-table td {
+            padding: 25px;
+            border-bottom: 3px solid #E3F2FD;
+            font-size: 1.2em;
+        }
+        
+        .code-table tr:hover {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        
+        .code-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .code-table .code {
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            color: #E65100;
+            font-size: 1.4em;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFE082 100%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(201, 162, 39, 0.3);
+        }
+        
+        /* 팁 박스 */
+        .tip {
+            background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+            border-left: 8px solid #4CAF50;
             padding: 30px;
             border-radius: 15px;
-            border-left: 5px solid #1F4788;
-            margin: 20px 0;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
         }
         
-        .codes-box h3 {
-            color: #1F4788;
+        .tip-title {
+            color: #1B5E20;
+            font-weight: 900;
             font-size: 1.4em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .code-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-        
-        .code-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .code-name {
-            font-size: 1.1em;
-            color: #1F4788;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .code-value {
-            font-size: 1.5em;
-            color: #C9A227;
-            font-weight: 700;
-            font-family: monospace;
-            background: #f8f9fa;
-            padding: 8px 15px;
-            border-radius: 8px;
-        }
-        
-        .highlight {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-        }
-        
-        .highlight strong {
-            color: #856404;
-        }
-        
-        .schedule {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #28a745;
-            margin: 20px 0;
-        }
-        
-        .schedule h4 {
-            color: #155724;
-            font-size: 1.2em;
             margin-bottom: 15px;
         }
         
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-        
-        .schedule-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .schedule-item .time {
-            background: #28a745;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-        }
-        
-        .schedule-item .activity {
-            color: #155724;
+        .tip p {
+            color: #2E7D32;
+            font-size: 1.15em;
+            line-height: 1.8;
             font-weight: 600;
         }
         
+        /* 푸터 */
         .footer {
-            background: #1F4788;
+            background: linear-gradient(135deg, #1F4788 0%, #0d2347 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 60px 40px;
             text-align: center;
         }
         
-        .footer .vision-box {
-            background: rgba(201,162,39,0.2);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
+        .footer .verse {
+            font-size: 1.7em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.7);
         }
         
-        .footer .vision-title {
-            font-size: 1.2em;
-            color: #FFE5A0;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .footer p {
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-        
+        /* 모바일 */
         @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+            }
+            
+            .lang-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2.2em;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 3em;
             }
             
             .content {
                 padding: 30px 20px;
             }
             
-            .schedule-grid {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 1.4em;
+                padding: 20px 25px;
             }
             
-            .code-grid {
-                grid-template-columns: 1fr;
+            .step {
+                padding: 25px;
+            }
+            
+            .step h3 {
+                font-size: 1.3em;
             }
         }
     </style>
 </head>
 <body>
+    <!-- 언어 전환 버튼 -->
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">
+            <span id="lang-label">🌐 English</span>
+        </button>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <div class="logo fallback" id="app-logo">⛪</div>
-            <h1>Hebron 앱 등록 가이드</h1>
-            <div class="subtitle">시애틀지구촌교회</div>
-            <div class="vision">하나님과 연합하는 나의 제단</div>
-        </div>
-        
-        <div class="content">
-            <!-- 소개 -->
-            <div class="intro">
-                <h2>📱 5단계로 간단 등록</h2>
-                <p>
-                    21일 경청 프로젝트 시작을 위한<br>
-                    빠르고 쉬운 등록 가이드입니다
-                </p>
+        <!-- 한국어 버전 -->
+        <div id="ko-content" class="lang-content active">
+            <!-- 헤더 -->
+            <div class="header">
+                <div class="logo">🏔️</div>
+                <h1>Hebron 앱</h1>
+                <div class="subtitle">시애틀지구촌교회</div>
+                <div class="vision">✨ 등록 가이드 ✨</div>
             </div>
             
-            <!-- 1단계: 앱 접속 -->
-            <div class="step-section">
-                <h2 class="step-title">
-                    <span>📱</span>
-                    1단계: 앱 접속
-                </h2>
+            <!-- 콘텐츠 -->
+            <div class="content">
+                <!-- 소개 -->
+                <div class="intro">
+                    <h2>🙏 환영합니다!</h2>
+                    <p>
+                        Hebron 앱에 오신 것을 환영합니다.<br>
+                        하나님의 음성을 듣는 21일 경청 프로젝트를 시작해보세요!
+                    </p>
+                </div>
                 
-                <div class="step">
-                    <h3><span class="step-number">1</span>아래 주소로 접속하세요</h3>
-                    <div class="url-box">
-                        <div class="url">hebron-ijiguchon.web.app</div>
+                <!-- 1단계: 앱 접속 -->
+                <div class="section">
+                    <div class="section-title">📱 1단계: 앱 접속하기</div>
+                    
+                    <div class="step">
+                        <h3>▶ 웹 브라우저로 접속</h3>
+                        <div class="step-content">
+                            <p><strong>주소:</strong> hebron-ijiguchon.web.app</p>
+                            <p>Safari (iPhone) 또는 Chrome (Android)에서 위 주소를 입력하세요.</p>
+                        </div>
                     </div>
-                    <p>💡 <strong>팁:</strong> 홈 화면에 추가하면 앱처럼 사용 가능!</p>
+                    
+                    <div class="step">
+                        <h3>▶ 홈 화면에 추가 (선택사항)</h3>
+                        <div class="step-content">
+                            <p><strong>iPhone:</strong></p>
+                            <ul>
+                                <li>Safari에서 하단 공유 버튼 (□↑) 클릭</li>
+                                <li>"홈 화면에 추가" 선택</li>
+                                <li>"추가" 클릭</li>
+                            </ul>
+                            <p><strong>Android:</strong></p>
+                            <ul>
+                                <li>Chrome에서 메뉴 (⋮) 클릭</li>
+                                <li>"홈 화면에 추가" 선택</li>
+                                <li>"추가" 클릭</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 꿀팁!</div>
+                        <p>홈 화면에 추가하면 앱처럼 빠르게 접속할 수 있어요!</p>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- 2단계: 로그인 -->
-            <div class="step-section">
-                <h2 class="step-title">
-                    <span>🔐</span>
-                    2단계: 로그인
-                </h2>
                 
-                <div class="step">
-                    <h3><span class="step-number">2</span>로그인 방법 선택</h3>
-                    <p>
-                        <strong>방법 1:</strong> 이메일 주소 입력 → 로그인 링크 전송 클릭<br>
-                        (이메일로 받은 링크 클릭하면 자동 로그인)
-                    </p>
-                    <p>
-                        <strong>방법 2:</strong> Google 계정으로 간편 로그인
-                    </p>
-                </div>
-            </div>
-            
-            <!-- 3단계: 프로필 설정 -->
-            <div class="step-section">
-                <h2 class="step-title">
-                    <span>👤</span>
-                    3단계: 프로필 설정
-                </h2>
-                
-                <div class="step">
-                    <h3><span class="step-number">3</span>기본 정보 입력</h3>
-                    <p>
-                        <strong>이름:</strong> 본인 이름<br>
-                        <strong>목장 이름:</strong> 아래 코드표 참고<br>
-                        <strong>영적 여정:</strong> VIP/신자/제자/목자 선택<br>
-                        <strong>공개 범위:</strong> 나만 보기/목자와 공유/목장 전체 공유
-                    </p>
-                </div>
-            </div>
-            
-            <!-- 4단계: 목장 등록 -->
-            <div class="step-section">
-                <h2 class="step-title">
-                    <span>🏠</span>
-                    4단계: 목장 등록
-                </h2>
-                
-                <div class="step">
-                    <h3><span class="step-number">4</span>목장 탭에서 등록</h3>
-                    <p>
-                        하단 메뉴 <strong>"목장"</strong> 탭 클릭 →<br>
-                        <strong>"🙋 목장식구 등록"</strong> 버튼 클릭
-                    </p>
+                <!-- 2단계: 로그인 -->
+                <div class="section">
+                    <div class="section-title">🔐 2단계: 로그인하기</div>
+                    
+                    <div class="step">
+                        <h3>▶ 로그인 방법 선택</h3>
+                        <div class="step-content">
+                            <p><strong>1. 이메일 로그인</strong></p>
+                            <ul>
+                                <li>이메일 주소 입력</li>
+                                <li>비밀번호 설정 (6자 이상)</li>
+                                <li>"회원가입" 또는 "로그인" 클릭</li>
+                            </ul>
+                            
+                            <p><strong>2. Google 로그인 (추천 🌟)</strong></p>
+                            <ul>
+                                <li>"Google 계정으로 로그인" 클릭</li>
+                                <li>Google 계정 선택</li>
+                                <li>자동 로그인 완료!</li>
+                            </ul>
+                            
+                            <p><strong>3. 게스트로 입장</strong></p>
+                            <ul>
+                                <li>로그인 없이 바로 사용</li>
+                                <li>이 기기에서만 사용 가능</li>
+                                <li>나중에 계정 연결 가능</li>
+                            </ul>
+                        </div>
+                    </div>
                     
                     <div class="highlight">
-                        <strong>✏️ 입력 내용:</strong><br>
-                        • 이름: 본인 이름<br>
-                        • 목장 이름: 어린이/GMC YOUTH/청년/이스라엘/멕시코/인도네시아<br>
-                        • 목장 코드: 아래 표 참고 (GMCHC001, GMCHC101, GMCHC201, GMCHC301...)<br>
-                        • 역할: 목원 (목자님은 목자/목녀)
+                        🔒 <strong>100% 안전합니다!</strong><br>
+                        모든 데이터는 Google Firebase에 안전하게 보관됩니다
+                    </div>
+                </div>
+                
+                <!-- 3단계: 프로필 설정 -->
+                <div class="section">
+                    <div class="section-title">👤 3단계: 프로필 설정하기</div>
+                    
+                    <div class="step">
+                        <h3>▶ #1. 이름 입력</h3>
+                        <div class="step-content">
+                            <p>본인의 이름을 입력하세요.</p>
+                            <p><strong>예:</strong> 김찬양</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h3>▶ #2. 목장 이름 입력</h3>
+                        <div class="step-content">
+                            <p>소속 목장 이름을 입력하세요.</p>
+                            <p><strong>목장 이름:</strong> 어린이, 청소년, 청년, 이스라엘, 멕시코, 인도네시아</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h3>▶ #3. 선교적 가정교회 4단계 헌신 여정</h3>
+                        <div class="step-content">
+                            <p><strong>역할 선택:</strong></p>
+                            <ul>
+                                <li><strong>① 순례자 (VIP)</strong> - 하나님을 찾고 있는 사람</li>
+                                <li><strong>② 신자</strong> - 예수님을 영접한 사람</li>
+                                <li><strong>③ 제자</strong> - 예수님을 따르는 사람</li>
+                                <li><strong>④ 목자</strong> - 목장을 이끄는 사람<br>
+                                    <span style="color: #C9A227; font-weight: 900;">(세부 역할: 목자 / 목녀 / 목부 / 전도사 / 목사)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 헌신 여정이란?</div>
+                        <p>믿음의 성장 단계입니다. 현재 내 위치를 선택하세요. 나중에 변경할 수 있습니다!</p>
+                    </div>
+                </div>
+                
+                <!-- 4단계: 목장 식구 등록 -->
+                <div class="section">
+                    <div class="section-title">🏠 4단계: 목장식구 등록하기</div>
+                    
+                    <div class="step">
+                        <h3>▶ 목장 코드 입력</h3>
+                        <div class="step-content">
+                            <p>목장식구로 정식 등록하려면 <strong style="color: #C9A227;">목장 코드</strong>가 필요합니다.</p>
+                            <p><strong>입력 방법:</strong></p>
+                            <ol>
+                                <li>앱 하단 "목장" 탭 클릭</li>
+                                <li>"🙋 목장식구 등록" 버튼 클릭</li>
+                                <li>이름, 목장 코드, 역할 입력</li>
+                                <li>"등록하기" 클릭</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        📋 <strong>목장 코드는 목자님께 문의하세요!</strong>
                     </div>
                 </div>
                 
                 <!-- 목장 코드표 -->
-                <div class="codes-box">
-                    <h3>📋 목장 코드표</h3>
-                    <div class="code-grid">
-                        <div class="code-item">
-                            <div class="code-name">👶 어린이 목장</div>
-                            <div class="code-value">GMCHC001</div>
-                        </div>
-                        <div class="code-item">
-                            <div class="code-name">👨 GMC YOUTH</div>
-                            <div class="code-value">GMCHC101</div>
-                        </div>
-                        <div class="code-item">
-                            <div class="code-name">🎓 청년 목장</div>
-                            <div class="code-value">GMCHC201</div>
-                        </div>
-                        <div class="code-item">
-                            <div class="code-name">🇮🇱 이스라엘 목장</div>
-                            <div class="code-value">GMCHC301</div>
-                        </div>
-                        <div class="code-item">
-                            <div class="code-name">🇲🇽 멕시코 목장</div>
-                            <div class="code-value">GMCHC302</div>
-                        </div>
-                        <div class="code-item">
-                            <div class="code-name">🇮🇩 인도네시아 목장</div>
-                            <div class="code-value">GMCHC303</div>
-                        </div>
+                <div class="section">
+                    <div class="section-title">📋 목장 코드표</div>
+                    
+                    <div class="code-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>목장 이름</th>
+                                    <th>목장 코드</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>어린이 목장</strong></td>
+                                    <td><span class="code">GMCHC001</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>청소년 목장</strong></td>
+                                    <td><span class="code">GMCHC101</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>청년 목장</strong></td>
+                                    <td><span class="code">GMCHC201</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>이스라엘 목장</strong></td>
+                                    <td><span class="code">GMCHC301</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>멕시코 목장</strong></td>
+                                    <td><span class="code">GMCHC302</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>인도네시아 목장</strong></td>
+                                    <td><span class="code">GMCHC303</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <p style="text-align: center; margin-top: 15px; color: #1F4788; font-size: 0.95em;">
-                        💡 목장 코드는 딱 한 번만 입력!<br>
-                        <span style="font-size: 0.85em; opacity: 0.8;">확장 가능한 체계적 코드 (GMCHC001-999)</span>
-                    </p>
+                    
+                    <div class="tip">
+                        <div class="tip-title">⚠️ 주의사항</div>
+                        <p>목장 코드는 정확히 입력해주세요! (대문자, 하이픈 없음)</p>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- 5단계: 21일 프로젝트 시작 -->
-            <div class="step-section">
-                <h2 class="step-title">
-                    <span>🎯</span>
-                    5단계: 21일 프로젝트 시작
-                </h2>
                 
-                <div class="step">
-                    <h3><span class="step-number">5</span>경청훈련 시작하기</h3>
-                    <p>
-                        <strong>"가이드"</strong> 탭 →<br>
-                        <strong>"21일 경청 프로젝트 시작하기"</strong> 버튼 클릭
-                    </p>
+                <!-- 시작하기 -->
+                <div class="section">
+                    <div class="section-title">🚀 이제 시작하세요!</div>
                     
-                    <div class="schedule">
-                        <h4>⏰ 매일 30분 루틴</h4>
-                        <div class="schedule-grid">
-                            <div class="schedule-item">
-                                <div class="time">10분</div>
-                                <div class="activity">📖 말씀 묵상</div>
-                            </div>
-                            <div class="schedule-item">
-                                <div class="time">15분</div>
-                                <div class="activity">🙏 침묵 기도</div>
-                            </div>
-                            <div class="schedule-item">
-                                <div class="time">5분</div>
-                                <div class="activity">✍️ 경청 노트</div>
-                            </div>
+                    <div class="step">
+                        <h3>▶ 21일 경청 프로젝트</h3>
+                        <div class="step-content">
+                            <p>하나님의 음성을 듣는 21일 훈련을 시작하세요!</p>
+                            <ul>
+                                <li>매일 말씀 묵상</li>
+                                <li>경청 노트 작성</li>
+                                <li>목장 식구들과 함께 성장</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <p style="text-align: center; margin-top: 15px;">
-                        <strong style="color: #28a745;">일지 탭에서 매일의 경청 경험을 기록하세요!</strong>
-                    </p>
+                    <div class="highlight">
+                        ✨ <strong>목장 식구들과 함께 21일 여정을 완주하세요!</strong> ✨
+                    </div>
                 </div>
             </div>
             
-        </div>
-        
-        <div class="footer">
-            <div class="vision-box">
-                <div class="vision-title">Genesis 13:14 비전</div>
-                <div style="font-size: 1.1em; margin: 15px 0;">하나님과 연합하는 나의 제단</div>
-                <p style="font-size: 0.95em; opacity: 0.9;">
-                    "너 있는 곳에서 눈을 크게 뜨고,<br>
-                    북쪽과 남쪽, 동쪽과 서쪽을 보아라"<br>
-                    - 창세기 13:14
+            <!-- 푸터 -->
+            <div class="footer">
+                <div class="verse">"네가 눈을 들어 사방을 바라보라"</div>
+                <p style="font-size: 1.3em; margin-bottom: 25px; font-weight: 700;">
+                    창세기 13:14
+                </p>
+                <p style="font-size: 1.1em; margin-top: 25px; opacity: 0.9;">
+                    하나님의 음성이 들리는 귀
+                </p>
+                <p style="margin-top: 25px; opacity: 0.85; font-size: 1.1em;">
+                    시애틀지구촌교회<br>
+                    Global Mission Church of Greater Seattle
                 </p>
             </div>
+        </div>
+
+        <!-- English Version -->
+        <div id="en-content" class="lang-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">🏔️</div>
+                <h1>Hebron App</h1>
+                <div class="subtitle">GMC Seattle</div>
+                <div class="vision">✨ Registration Guide ✨</div>
+            </div>
             
-            <p style="margin-top: 20px; font-size: 1.1em; font-weight: 600;">
-                21일 경청 프로젝트<br>
-                하나님의 음성이 들리는 귀
-            </p>
+            <!-- Content -->
+            <div class="content">
+                <!-- Introduction -->
+                <div class="intro">
+                    <h2>🙏 Welcome!</h2>
+                    <p>
+                        Welcome to the Hebron App.<br>
+                        Start your 21-Day Listening Project to hear God's voice!
+                    </p>
+                </div>
+                
+                <!-- Step 1: Access -->
+                <div class="section">
+                    <div class="section-title">📱 Step 1: Access the App</div>
+                    
+                    <div class="step">
+                        <h3>▶ Open in Web Browser</h3>
+                        <div class="step-content">
+                            <p><strong>URL:</strong> hebron-ijiguchon.web.app</p>
+                            <p>Enter the URL in Safari (iPhone) or Chrome (Android).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h3>▶ Add to Home Screen (Optional)</h3>
+                        <div class="step-content">
+                            <p><strong>iPhone:</strong></p>
+                            <ul>
+                                <li>Tap Share button (□↑) in Safari</li>
+                                <li>Select "Add to Home Screen"</li>
+                                <li>Tap "Add"</li>
+                            </ul>
+                            <p><strong>Android:</strong></p>
+                            <ul>
+                                <li>Tap Menu (⋮) in Chrome</li>
+                                <li>Select "Add to Home screen"</li>
+                                <li>Tap "Add"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 Pro Tip!</div>
+                        <p>Adding to home screen allows quick access like a native app!</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Login -->
+                <div class="section">
+                    <div class="section-title">🔐 Step 2: Sign In</div>
+                    
+                    <div class="step">
+                        <h3>▶ Choose Sign In Method</h3>
+                        <div class="step-content">
+                            <p><strong>1. Email Sign In</strong></p>
+                            <ul>
+                                <li>Enter email address</li>
+                                <li>Set password (6+ characters)</li>
+                                <li>Click "Sign Up" or "Sign In"</li>
+                            </ul>
+                            
+                            <p><strong>2. Google Sign In (Recommended 🌟)</strong></p>
+                            <ul>
+                                <li>Click "Sign in with Google"</li>
+                                <li>Select Google account</li>
+                                <li>Automatic sign in complete!</li>
+                            </ul>
+                            
+                            <p><strong>3. Guest Mode</strong></p>
+                            <ul>
+                                <li>Use without sign in</li>
+                                <li>Available on this device only</li>
+                                <li>Can link account later</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        🔒 <strong>100% Safe & Secure!</strong><br>
+                        All data is securely stored on Google Firebase
+                    </div>
+                </div>
+                
+                <!-- Step 3: Profile -->
+                <div class="section">
+                    <div class="section-title">👤 Step 3: Setup Profile</div>
+                    
+                    <div class="step">
+                        <h3>▶ #1. Enter Name</h3>
+                        <div class="step-content">
+                            <p>Enter your name.</p>
+                            <p><strong>Example:</strong> John Kim</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h3>▶ #2. Enter House Church Name</h3>
+                        <div class="step-content">
+                            <p>Enter your house church name.</p>
+                            <p><strong>House Church Names:</strong> Children, Youth, Young Adult, Israel, Mexico, Indonesia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h3>▶ #3. Missional House Church 4-Stage Journey</h3>
+                        <div class="step-content">
+                            <p><strong>Choose Your Role:</strong></p>
+                            <ul>
+                                <li><strong>① Seeker (VIP)</strong> - Searching for God</li>
+                                <li><strong>② Believer</strong> - Accepted Jesus</li>
+                                <li><strong>③ Disciple</strong> - Following Jesus</li>
+                                <li><strong>④ Mokja (Shepherd)</strong> - Leading a house church<br>
+                                    <span style="color: #C9A227; font-weight: 900;">(Roles: Mokja / Mokja's wife / Mokja's husband / Evangelist / Pastor)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 About the Journey</div>
+                        <p>Stages of faith growth. Select your current position. You can change it later!</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Registration -->
+                <div class="section">
+                    <div class="section-title">🏠 Step 4: Register as Member</div>
+                    
+                    <div class="step">
+                        <h3>▶ Enter House Church Code</h3>
+                        <div class="step-content">
+                            <p>To officially register, you need a <strong style="color: #C9A227;">House Church Code</strong>.</p>
+                            <p><strong>How to Enter:</strong></p>
+                            <ol>
+                                <li>Click "House Church" tab at bottom</li>
+                                <li>Click "🙋 Register as Member" button</li>
+                                <li>Enter name, code, and role</li>
+                                <li>Click "Register"</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        📋 <strong>Ask your Mokja for the code!</strong>
+                    </div>
+                </div>
+                
+                <!-- Code Table -->
+                <div class="section">
+                    <div class="section-title">📋 House Church Code Table</div>
+                    
+                    <div class="code-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>House Church</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Children</strong></td>
+                                    <td><span class="code">GMCHC001</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Youth</strong></td>
+                                    <td><span class="code">GMCHC101</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Young Adult</strong></td>
+                                    <td><span class="code">GMCHC201</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Israel</strong></td>
+                                    <td><span class="code">GMCHC301</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mexico</strong></td>
+                                    <td><span class="code">GMCHC302</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Indonesia</strong></td>
+                                    <td><span class="code">GMCHC303</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="tip">
+                        <div class="tip-title">⚠️ Important</div>
+                        <p>Enter the code exactly as shown! (Uppercase, no hyphens)</p>
+                    </div>
+                </div>
+                
+                <!-- Get Started -->
+                <div class="section">
+                    <div class="section-title">🚀 Get Started!</div>
+                    
+                    <div class="step">
+                        <h3>▶ 21-Day Listening Project</h3>
+                        <div class="step-content">
+                            <p>Begin your 21-day training to hear God's voice!</p>
+                            <ul>
+                                <li>Daily Scripture meditation</li>
+                                <li>Write listening notes</li>
+                                <li>Grow with house church members</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        ✨ <strong>Complete the journey with your house church!</strong> ✨
+                    </div>
+                </div>
+            </div>
             
-            <p style="margin-top: 20px; opacity: 0.8;">
-                시애틀지구촌교회<br>
-                Seattle Global Mission Church
-            </p>
+            <!-- Footer -->
+            <div class="footer">
+                <div class="verse">"Lift up your eyes and look around"</div>
+                <p style="font-size: 1.3em; margin-bottom: 25px; font-weight: 700;">
+                    Genesis 13:14
+                </p>
+                <p style="font-size: 1.1em; margin-top: 25px; opacity: 0.9;">
+                    Ears to Hear God's Voice
+                </p>
+                <p style="margin-top: 25px; opacity: 0.85; font-size: 1.1em;">
+                    시애틀지구촌교회<br>
+                    Global Mission Church of Greater Seattle
+                </p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Logo loading
-        window.addEventListener('load', function() {
-            const logo = document.getElementById('app-logo');
-            const img = new Image();
-            img.onload = function() {
-                logo.classList.remove('fallback');
-                logo.style.backgroundImage = "url('icon-180.png')";
-            };
-            img.onerror = function() {
-                const altImg = new Image();
-                altImg.onload = function() {
-                    logo.classList.remove('fallback');
-                    logo.style.backgroundImage = "url('icon-192.png')";
-                };
-                altImg.src = 'icon-192.png';
-            };
-            img.src = 'icon-180.png';
-        });
+        let currentLang = 'ko';
+        
+        function toggleLang() {
+            currentLang = currentLang === 'ko' ? 'en' : 'ko';
+            
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            document.getElementById(currentLang + '-content').classList.add('active');
+            
+            document.getElementById('lang-label').textContent = 
+                currentLang === 'ko' ? '🌐 English' : '🌐 한국어';
+            
+            document.title = currentLang === 'ko' ? 
+                'Hebron 앱 등록 가이드 - 시애틀지구촌교회' : 
+                'Hebron App Registration Guide - GMC Seattle';
+        }
     </script>
 </body>
 </html>
